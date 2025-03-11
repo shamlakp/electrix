@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Profile - E-Review{% endblock %}
+
+{% block content %}
+  <h2>Your Profile</h2>
+  <div class="row">
+    <div class="col-md-4">
+      <img src="{{ user.profile_image_url }}" class="img-fluid rounded-circle" alt="Profile Image">
+    </div>
+    <div class="col-md-8">
+      <h3>{{ user.username }}</h3>
+      <p>Email: {{ user.email }}</p>
+      <!-- Additional profile details can be added here -->
+      <a href="/products/edit_profile/" class="btn btn-secondary">Edit Profile</a>
+    </div>
+  </div>
+{% endblock %}

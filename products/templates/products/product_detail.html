@@ -1,0 +1,44 @@
+
+{% extends "base.html" %}
+
+{% block title %}{{ product.name }} - Product Details{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>{{ product.name }}</h2>
+    <img src="{{ product.image.url }}" class="img-fluid mb-3" alt="{{ product.name }}" style="max-width: 300px;">
+    <p><strong>Price:</strong> ${{ product.price }}</p>
+    <p><strong>Description:</strong> {{ product.description }}</p>
+
+    <hr>
+    
+    <!-- Review Form -->
+    {% if user.is_authenticated %}
+        <h4>Leave a Review</h4>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-success">Submit Review</button>
+        </form>
+    {% else %}
+        <p><a href="{% url 'public_login' %}">Login</a> to write a review.</p>
+    {% endif %}
+
+    <hr>
+
+    <!-- Display Reviews -->
+    <h4>Reviews</h4>
+    {% if reviews %}
+        <ul class="list-group">
+            {% for review in reviews %}
+                <li class="list-group-item">
+                    <strong>{{ review.user.username }}</strong>: {{ review.text }}
+                    <small class="text-muted">({{ review.created_at }})</small>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No reviews yet. Be the first to review this product!</p>
+    {% endif %}
+</div>
+{% endblock %}
