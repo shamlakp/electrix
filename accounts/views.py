@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import AdminRegistrationForm
 
 
-
+#electronic product review
 
 
 def admin_login(request):
